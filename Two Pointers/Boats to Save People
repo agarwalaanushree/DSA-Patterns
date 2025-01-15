@@ -1,0 +1,38 @@
+https://leetcode.com/problems/boats-to-save-people/description/
+
+class Solution {
+public:
+    int numRescueBoats(vector<int>& people, int limit) {
+        int cnt=0;
+        int l=0,u=people.size()-1;
+        sort(people.begin(),people.end());
+        while(l<=u)
+        {
+            if(people[u]==limit)
+            {
+                u--;
+                cnt++;
+            }
+            else
+            {
+                if(people[l]+people[u]<=limit)
+                {
+                    l++;
+                    u--;
+                    cnt++;
+                }
+                else if(people[l]+people[u]>limit)
+                {
+                    u--;
+                    cnt++;
+                }
+                else if(l==u && people[l]<=limit)
+                {
+                    l++;
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+};
