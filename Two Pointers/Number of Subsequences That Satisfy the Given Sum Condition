@@ -1,0 +1,30 @@
+https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/description/
+
+class Solution {
+public:
+    int numSubseq(vector<int>& nums, int target) {
+        int MOD=1e9+7;
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        vector<int> pows(n,1);
+        int ans=0,i=0,j=n-1;
+        for(int i=1;i<n;i++)
+        {
+            pows[i]=pows[i-1]*2 % MOD;
+        }
+        while(i<=j)
+        {
+            if(nums[i]+nums[j]>target)
+            {
+                j--;
+            }
+            else
+            {
+                ans=(ans+pows[j-i])%MOD;
+                i++;
+            }
+        }
+
+        return ans;
+    }
+};
